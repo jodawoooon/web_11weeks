@@ -1,0 +1,72 @@
+<!-- 눈이 내리는 웹페이지를 작성하라.
+눈은 시간에 따라 계속 아래로 내리고 바닥 근처에 닿으면 다시 위에서 내리도록
+한다. 눈 : *
+ -->
+
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>눈 내리는 샤갈의 마을</title>
+    <style>
+
+        body{
+            background-image: url(http://thumbnail.egloos.net/600x0/http://pds26.egloos.com/pds/201212/24/91/b0041991_50d80d7346b99.jpg);
+            background-repeat: no-repeat;
+            background-size : cover;
+        }
+        
+        div{
+            position: absolute;
+            color : white;
+            color : white;
+            font-size:40px;
+        }
+
+    </style>
+    <script>
+    </script>
+</head>
+
+<body onload="play()" >
+    <script>
+        
+        var snow = new Array(20); //눈 20개 배열
+        var x = new Array(20); //눈 x좌표
+        var y = new Array(20); //눈 y좌표
+
+        for(var i=0;i<20;i++){ //기본 눈 만들기
+                y[i] = Math.floor(Math.random()*window.innerHeight+10);
+                x[i] = Math.floor(Math.random()*window.innerWidth-10);
+
+                document.write("<div class='snow' id='sn'"+i+" style='top:"+x[i]+"px; left:"+y[i]+"px'>*</div>")
+            
+                snow[i] = document.getElementById("sn"+i);
+            }
+            
+        var TimerID = setInterval("play()",100);
+
+
+        function play(){
+
+            for(i=0;i<20;i++){
+                y[i] += Math.random()*2 + 2; //눈의 다음 y좌표. 내려오는 속도
+                x[i] += Math.random()*2 + 2; //눈의 다음 x좌표
+                if(y[i] >= window.innerHeight-60){ //눈이 땅에 닿으면 새 눈 생성
+                    x[i] = Math.floor(Math.random()*window.innerHeight);
+                    y[i]=0;
+                }
+
+                snow[i].style.top = y[i] + "px"; //만들어 놓은 눈의 x,y좌표 변경
+                snow[i].style.left = x[i] + "px";
+
+            } setInterval("play()",100);
+        }
+        
+
+    </script>
+
+</body>
+
+</html>
